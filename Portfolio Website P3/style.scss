@@ -1,0 +1,136 @@
+
+@import 'reset'; 
+
+
+$ns: portfolio;
+
+
+$primary-color: #555;
+$font-size-base: 16px;
+$font-stack: 'Poppins', sans-serif;
+$spacing: 10px;
+$breakpoint-mobile: 600px;
+
+
+$double-spacing: $spacing * 2;
+
+
+
+body.#{$ns} {
+  font-family: $font-stack;
+  font-size: $font-size-base;
+  margin: 0;
+  background-color: lighten($primary-color, 40%);
+
+  header {
+    background-color: $primary-color;
+    color: white;
+    padding: $double-spacing;
+
+    nav {
+      ul {
+        display: flex;
+        gap: $spacing;
+
+        li {
+          list-style: none;
+
+          a {
+            color: white;
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  
+  %button-shared {
+    border-radius: 8px;
+    padding: $spacing;
+  }
+
+  .btn {
+    @extend %button-shared;
+    background-color: darken($primary-color, 10%);
+    color: white;
+  }
+
+  .btn-outline {
+    @extend %button-shared;
+    border: 1px solid $primary-color;
+    background-color: transparent;
+    color: $primary-color;
+  }
+
+  
+  $theme: dark;
+
+  @if $theme == dark {
+    background-color: #111;
+    color: #eee;
+  }
+  @else if $theme == light {
+    background-color: #fff;
+    color: #000;
+  }
+  @else {
+    background-color: #ccc;
+  }
+
+  
+  @for $i from 1 through 3 {
+    .card-#{$i} {
+      width: 100px * $i;
+    }
+  }
+
+  $colors: red, green, blue;
+  @each $color in $colors {
+    .text-#{$color} {
+      color: $color;
+    }
+  }
+
+  $x: 0;
+  @while $x < 3 {
+    .margin-#{$x} {
+      margin: $x * 5px;
+    }
+    $x: $x + 1;
+  }
+
+  
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 14px;
+    padding: $spacing;
+
+    header, nav, main, footer {
+      padding: 0 5px;
+    }
+
+    nav ul {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  @media (max-width: 900px) and (orientation: landscape) {
+    font-size: 17px;
+    padding: 20px;
+    nav ul {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+}
+
